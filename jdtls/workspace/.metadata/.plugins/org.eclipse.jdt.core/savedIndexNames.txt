@@ -1,5 +1,0 @@
-INDEX VERSION 1.134+/home/ayushman/.cache/jdtls/workspace/.metadata/.plugins/org.eclipse.jdt.core
-3842426239.index
-900586112.index
-459165077.index
-1865797976.index
