@@ -1,6 +1,6 @@
 --[[
 
-=====================================================================
+====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
 =====================================================================
 ========                                    .-----.          ========
@@ -399,12 +399,12 @@ require('lazy').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
-        -- pickers = {}
+        defaults = {
+          mappings = {
+            i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+          },
+        },
+        pickers = {},
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -467,6 +467,30 @@ require('lazy').setup({
       },
     },
   },
+  {
+    'supermaven-inc/supermaven-nvim',
+    config = function()
+      require('supermaven-nvim').setup {
+        keymaps = {
+          accept_suggestion = '<C-y>',
+          clear_suggestion = '<C-]>',
+          accept_word = '<C-j>',
+        },
+        ignore_filetypes = {},
+        color = {
+          suggestion_color = '#ffffff',
+          cterm = 244,
+        },
+        log_level = 'info',
+        disable_inline_completion = false,
+      }
+    end,
+    keys = {
+      { '<leader>ms', '<cmd>SupermavenStart<cr>', desc = 'Supermaven Start' },
+      { '<leader>mx', '<cmd>SupermavenStop<cr>', desc = 'Supermaven Stop' },
+    },
+  },
+
   {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
@@ -622,7 +646,7 @@ require('lazy').setup({
       -- See :help vim.diagnostic.Opts
       vim.diagnostic.config {
         severity_sort = true,
-        float = { border = 'rounded', source = 'if_many' },
+        float = { border = 'rounded', source = 'if_many', wrap = true },
         underline = { severity = vim.diagnostic.severity.ERROR },
         signs = vim.g.have_nerd_font and {
           text = {
@@ -872,20 +896,38 @@ require('lazy').setup({
     },
   },
 
+  -- {
+  --   'ellisonleao/gruvbox.nvim',
+  --   priority = 1000,
+  --   config = function()
+  --     require('gruvbox').setup {
+  --       contrast = 'hard', -- or 'soft', 'medium'
+  --       overrides = {
+  --         LineNr = { fg = '#98971a' }, -- ✅ Gruvbox green (bright green)
+  --         CursorLineNr = { fg = '#b8bb26', bold = true }, -- Optional: highlight active line number
+  --       },
+  --     }
+  --
+  --     vim.cmd.colorscheme 'gruvbox'
+  --   end,
+  -- },
   {
-    'ellisonleao/gruvbox.nvim',
+    'catppuccin/nvim',
+    name = 'catppuccin',
     priority = 1000,
     config = function()
-      require('gruvbox').setup {
-        contrast = 'hard', -- or 'soft', 'medium'
-        transparent_mode = true,
-        overrides = {
-          LineNr = { fg = '#98971a' }, -- ✅ Gruvbox green (bright green)
-          CursorLineNr = { fg = '#b8bb26', bold = true }, -- Optional: highlight active line number
+      require('catppuccin').setup {
+        flavour = 'frappe', -- or "latte", "macchiato", "frappe"
+        transparent_background = false,
+        -- optionally you can configure integrations:
+        integrations = {
+          cmp = true,
+          gitsigns = true,
+          nvimtree = true,
+          -- add more if you use them
         },
       }
-
-      vim.cmd.colorscheme 'gruvbox'
+      vim.cmd.colorscheme 'catppuccin'
     end,
   },
 

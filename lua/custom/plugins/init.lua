@@ -10,6 +10,10 @@ return {
       require('live-server').setup()
     end,
     cmd = { 'LiveServerStart', 'LiveServerStop' },
+    keys = {
+      { '<leader>ls', '<cmd>LiveServerStart<cr>', desc = 'LiveServer Start' },
+      { '<leader>lc', '<cmd>LiveServerStop<cr>', desc = 'LiveServer Stop' },
+    },
   },
   {
     'windwp/nvim-ts-autotag',
